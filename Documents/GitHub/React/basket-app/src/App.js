@@ -9,8 +9,10 @@ import {
   Button,
   Group,
   Drawer,
+  CardSection,
 } from "@mantine/core";
-import { IconCircleCheck, IconCircleDashed, IconWorld } from "@tabler/icons";
+
+import { IconCircleCheck, IconShoppingCart } from "@tabler/icons";
 import Card from "./components/Card";
 import "./App.css";
 
@@ -65,7 +67,14 @@ function App() {
         </Input.Wrapper>
         <Button onClick={() => setSearchValue("")}>Temizle</Button>
         <Indicator color="red" label={basketItems.length} size={22}>
-        <Button onClick={() => setOpened(true)}>Sepet</Button>
+          <Button onClick={() => setOpened(true)}>
+            icon=
+            {
+              <ThemeIcon>
+                <IconShoppingCart size={18} />
+              </ThemeIcon>
+            }
+          </Button>
         </Indicator>
       </Group>
       <SimpleGrid cols={3} className="Store">
