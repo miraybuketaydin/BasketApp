@@ -7,6 +7,7 @@ import {
   Input,
   Button,
   Group,
+  Drawer,
 } from "@mantine/core";
 import { IconCircleCheck, IconCircleDashed, IconWorld } from "@tabler/icons";
 import Card from "./components/Card";
@@ -46,6 +47,7 @@ const storeItems = [
 ];
 
 function App() {
+  let [opened, setOpened] = useState(false);
   let [basketItems, setBasketItems] = useState([]);
   let [searchValue, setSearchValue] = useState("");
   let filteredItems = storeItems.filter(
@@ -55,9 +57,13 @@ function App() {
     <Container>
       <Group align="end">
         <Input.Wrapper label="Arama">
-          <Input value={searchValue} onChange={(e) => setSearchValue(e.target.value)} />
+          <Input
+            value={searchValue}
+            onChange={(e) => setSearchValue(e.target.value)}
+          />
         </Input.Wrapper>
-        <Button onClick={()=> setSearchValue("")}>Temizle</Button>
+        <Button onClick={() => setSearchValue("")}>Temizle</Button>
+        <Button onClick={() => setOpened(true)}>Sepet</Button>
       </Group>
       <SimpleGrid cols={3} className="Store">
         {filteredItems.map(({ name, src }) => {
@@ -71,21 +77,29 @@ function App() {
           );
         })}
       </SimpleGrid>
-      <List
-        className="List"
-        spacing="xs"
-        size="sm"
-        center
-        icon={
-          <ThemeIcon color="teal" size={24} radius="xl">
-            <IconCircleCheck size={16} />
-          </ThemeIcon>
-        }
+      <Drawer
+        opened={opened}
+        onClose={() => setOpened(false)}
+        title="Sepetim"
+        padding="md"
+        size="md"
       >
-        {basketItems.map(({ name }, index) => (
-          <List.Item key={index}>{name}</List.Item>
-        ))}
-      </List>
+        <List
+          className="List"
+          spacing="xs"
+          size="sm"
+          center
+          icon={
+            <ThemeIcon color="teal" size={24} radius="xl">
+              <IconCircleCheck size={16} />
+            </ThemeIcon>
+          }
+        >
+          {basketItems.map(({ name }, index) => (
+            <List.Item key={index}>{name}</List.Item>
+          ))}
+        </List>
+      </Drawer>
     </Container>
   );
 }
