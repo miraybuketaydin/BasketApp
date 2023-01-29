@@ -5,6 +5,7 @@ import {
   ThemeIcon,
   SimpleGrid,
   Input,
+  Indicator,
   Button,
   Group,
   Drawer,
@@ -63,7 +64,9 @@ function App() {
           />
         </Input.Wrapper>
         <Button onClick={() => setSearchValue("")}>Temizle</Button>
+        <Indicator color="red" label={basketItems.length} size={22}>
         <Button onClick={() => setOpened(true)}>Sepet</Button>
+        </Indicator>
       </Group>
       <SimpleGrid cols={3} className="Store">
         {filteredItems.map(({ name, src }) => {
